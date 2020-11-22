@@ -18,12 +18,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(error => {
-        if(error){
+        if (error) {
           switch (error.status) {
-            case 400: 
-              if(error.error.errors){
+            case 400:
+              if (error.error.errors) {
                 const modalStateErrors = [];
-                error.error.errors.forEach(item => {
+                error.error.errors.forEach((item: { error: any; }) => {
                   modalStateErrors.push(item.error);
                 });
 
